@@ -26,6 +26,19 @@
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                 <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 custom md:border-0 md:bg-transparent border-gray-700">
                 <li>
+                    <form id="createHEHE" action="{{route('job_create')}}" method="POST">
+                        @csrf
+                        <input type="hidden" id="company_id" name="company_id" value="{{$company->company_id}}">
+                        <a href="#" onclick="createFunction()" class="block py-2 px-3 text-white bg-blue-500 rounded md:bg-transparent md:p-0 md:text-blue-800 md:hover:text-blue-500" aria-current="page">Add</a>
+                    </form>
+                    <script>
+                        function createFunction() {
+                            document.getElementById("createHEHE").submit();
+                        }
+                    </script>
+
+                </li>
+                <li>
                     <a href="{{route('home')}}" class="block py-2 px-3 text-white bg-blue-500 rounded md:bg-transparent md:p-0 md:text-blue-800 md:hover:text-blue-500" aria-current="page">Back</a>
                 </li>
                 </ul>
@@ -38,22 +51,23 @@
     </div>
 
     <div class="min-h-dvh flex flex-row my-4 fontEpilogue mx-10 gap-x-4">
+        @foreach($ads as $ad)
         <a href="">
             <div class="w-full max-w-64 bg-white border border-gray-200 rounded-lg shadow ">
                 <div class="flex flex-col pb-10">
                     <div class="pt-2 px-5 w-full flex flex-row items-center justify-between">
-                        <img class="mt-3 w-14 h-14 mb-3 rounded-full border" src="{{asset('images/logo-light.png')}}" alt="Bonnie image"/>
+                        <img class="mt-3 w-14 h-14 mb-3 rounded-full border" src="{{asset('images/logo-light.png')}}" alt="logo image"/>
 
-                        <span class="p-1 border border-blue-500 text-blue-500">Full Time</span>
+                        <span class="p-1 border border-blue-500 text-blue-500">{{$ad->enrollment}}</span>
                     </div>
                     <div class="mx-5">
-                        <h5 class="mb-1 text-xl font-medium text-gray-900 ">Product Designer</h5>
+                        <h5 class="mb-1 text-xl font-medium text-gray-900 ">{{$ad->title}}</h5>
                     </div>
                     <div class="mx-5">
-                        <h5 class="mb-1 text-base font-medium text-gray-500 ">ClassPass ⋅ Manchester, UK</h5>
+                        <h5 class="mb-1 text-base font-medium text-gray-500 ">{{$company->Address}}</h5>
                     </div>
                     <div class="mx-5 mt-2 overflow-clip">
-                        <h5 class="mb-1 text-base font-medium text-gray-500 ">ClassPass is looking for Product Designer to help us...</h5>
+                        <h5 class="mb-1 text-base font-medium text-gray-500 ">{{$ad->description}}</h5>
                     </div>
                     <div class="mx-5">
 
@@ -61,6 +75,7 @@
                 </div>
             </div>
         </a>
+        @endforeach
     </div>
 
     <footer class="custom mt-10">

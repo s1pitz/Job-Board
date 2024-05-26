@@ -17,6 +17,7 @@ return new class extends Migration
             $table->longText('description');
             $table->float('Lower_salary');
             $table->float('Upper_salary')->nullable();
+            $table->string('enrollment');
             $table->integer('company_id')->unsigned();
             $table->foreign('company_id')->references('company_id')->on('companies')->onDelete('cascade');
             $table->timestamps();
