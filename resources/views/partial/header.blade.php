@@ -39,7 +39,7 @@
                 </li>
             @endauth
             <li>
-                <a href="#" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0 md:text-blue-800 md:dark:hover:bg-transparent">Company</a>
+                <a href="{{route('company')}}" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0 md:text-blue-800 md:dark:hover:bg-transparent">Company</a>
             </li>
             </ul>
         </div>

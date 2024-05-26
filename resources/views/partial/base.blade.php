@@ -10,11 +10,11 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     @vite('resources/css/app.css')
 </head>
-<body>
+<body style="overflow-y: scroll;">
 
     @include('partial.header')
 
-    <div class="container p-4">
+    <div class="w-full">
         @yield('content')
     </div>
 
