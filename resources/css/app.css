@@ -5,3 +5,16 @@
 .custom{
     background-color: #123c72;
 }
+
+.buttonColor{
+    background-color: #2360b1;
+}
+
+.footerText{
+    fill: #6b7280;
+}
+
+.hover\:fill-white:hover {
+    --tw-text-opacity: 1;
+    fill: rgb(255 255 255 / var(--tw-text-opacity));
+}

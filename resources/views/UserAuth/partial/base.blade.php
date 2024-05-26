@@ -12,13 +12,13 @@
 </head>
 <body>
 
-    @include('partial.header')
+    @include('UserAuth.partial.header')
 
     <div class="container p-4">
         @yield('content')
     </div>
 
-    @include('partial.footer')
+    @include('UserAuth.partial.footer')
     @vite('resources/js/app.js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>
