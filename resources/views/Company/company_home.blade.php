@@ -53,7 +53,7 @@
     <div class="min-h-dvh flex flex-row my-4 fontEpilogue mx-10 gap-x-4">
         @foreach($ads as $ad)
         <a href="">
-            <div class="w-full max-w-64 bg-white border border-gray-200 rounded-lg shadow ">
+            <div class="w-64 h-64 bg-white border border-gray-200 rounded-lg shadow ">
                 <div class="flex flex-col pb-10">
                     <div class="pt-2 px-5 w-full flex flex-row items-center justify-between">
                         <img class="mt-3 w-14 h-14 mb-3 rounded-full border" src="{{asset('images/logo-light.png')}}" alt="logo image"/>

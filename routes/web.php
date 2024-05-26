@@ -1,13 +1,20 @@
 <?php
 
 use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\JobController;
+use App\Models\Ad;
+use App\Models\Company;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserAuthenticatorController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('index');
+
+    $companies = DB::table('companies')
+    ->join('ads', 'companies.company_id', '=', 'ads.company_id')
+    ->get();
+    return view('index', compact('companies'));
+
 })->name('home');
 
 Route::get('/login', [UserAuthenticatorController::class, 'login'])->name('login');

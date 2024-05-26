@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
     use HasFactory;
+
+    public function ads(){
+        return $this->hasMany(Ad::class);
+    }
      /**
      * The attributes that are mass assignable.
      *

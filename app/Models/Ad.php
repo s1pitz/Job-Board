@@ -9,6 +9,12 @@ class Ad extends Model
 {
     use HasFactory;
 
+    protected $table = 'ads';
+
+    public function company(){
+        return $this->belongsTo(Company::class);
+    }
+
      /**
      * The attributes that are mass assignable.
      *
