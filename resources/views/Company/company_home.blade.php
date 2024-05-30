@@ -39,6 +39,19 @@
 
                 </li>
                 <li>
+                    <form id="profileHEHE" action="{{route('company_profile')}}" method="POST">
+                        @csrf
+                        <input type="hidden" id="company_id" name="company_id" value="{{$company->company_id}}">
+                        <a href="#" onclick="profileFunction()" class="block py-2 px-3 text-white bg-blue-500 rounded md:bg-transparent md:p-0 md:text-blue-800 md:hover:text-blue-500" aria-current="page">Profile</a>
+                    </form>
+                    <script>
+                        function profileFunction() {
+                            document.getElementById("profileHEHE").submit();
+                        }
+                    </script>
+
+                </li>
+                <li>
                     <a href="{{route('home')}}" class="block py-2 px-3 text-white bg-blue-500 rounded md:bg-transparent md:p-0 md:text-blue-800 md:hover:text-blue-500" aria-current="page">Back</a>
                 </li>
                 </ul>
@@ -47,12 +60,12 @@
     </nav>
 
     <div class="mt-7 mb-7 flex flex-col items-center justify-center">
-        <h1 class="text-2xl text-gray-700 font-semibold text-center fontEpilogue">Your Listings</h1>
+        <h1 class="text-2xl text-gray-700 font-semibold text-center fontEpilogue">Your Ads</h1>
     </div>
 
-    <div class="min-h-dvh flex flex-row my-4 fontEpilogue mx-10 gap-x-4">
+    <div class="min-h-dvh flex flex-row flex-wrap my-4 justify-center fontEpilogue mx-10 gap-x-4">
         @foreach($ads as $ad)
-        <a href="">
+        <a href="#">
             <div class="w-64 h-64 bg-white border border-gray-200 rounded-lg shadow ">
                 <div class="flex flex-col pb-10">
                     <div class="pt-2 px-5 w-full flex flex-row items-center justify-between">

@@ -10,7 +10,7 @@
         <h1 class="text-2xl text-gray-700 font-semibold text-center fontEpilogue">Jobs Available</h1>
     </div>
 
-    <div class="flex flex-row items-center my-4 fontEpilogue mx-10 gap-x-4">
+    <div class="flex flex-row items-center justify-center flex-wrap gap-y-4 my-4 fontEpilogue mx-10 gap-x-4">
         @foreach($companies as $company)
         <a href="">
             <div class="w-64 h-64 bg-white border border-gray-200 rounded-lg shadow ">

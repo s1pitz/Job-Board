@@ -109,7 +109,8 @@ class CompanyController extends Controller
         return redirect()->route('company');
     }
 
-    public function to_create(){
-        return view('company.jon_create');
+    public function company_profile(Request $request){
+        $company_id = $request->input('company_id');
+        return view('company.company_profile');
     }
 }

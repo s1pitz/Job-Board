@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create Advertisement</title>
+    <title>Company Profile</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link rel="icon" type="image/x-icon" href="{{asset('images/logo-dark.png')}}">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
@@ -34,28 +34,38 @@
     </nav>
 
     <div class="my-7 mx-auto p-10 min-h-dvh max-w-screen-md w-auto flex flex-col justify-center border rounded-3xl">
-        <h2 class="text-5xl font-bold text-left mb-10">Create Advertisement</h1>
+        <h2 class="text-5xl font-bold text-left mb-10">Sign In</h1>
         <div class="">
-            <form action="{{route('register_ad')}}" method="POST">
+            <form action="{{route('auth_login')}}" method="POST">
                 @csrf
-                <input type="hidden" id="company_id" name="company_id" value="{{$company_id}}">
-                <label for="ad_title">Advertisement Title</label>
-                <input type="name" name="ad_title" id="name" class="my-4 border-2 border-gray-200 rounded-lg p-2 w-full" required>
-                <label for="description">Description</label>
-                <textarea name="description" id="description" class="my-4 border-2 border-gray-200 rounded-lg p-2 w-full" placeholder="Include the job description here with the qualifications and responsibilities." required></textarea>
-                <label for="Lower_salary">Salary Range (Lower Bound)</label>
-                <input type="Lower_salary" name="company_Lower_salary" id="Lower_salary" class="my-4 border-2 border-gray-200 rounded-lg p-2 w-full" required>
-                <label for="Upper_salary">Salary Range (Upper Bound)</label>
-                <input type="Upper_salary" name="company_Upper_salary" id="Upper_salary" class="my-4 border-2 border-gray-200 rounded-lg p-2 w-full" required>
-                <label for="enrollment">Choose an Enrollment:</label>
-                <select id="enrollment" name="enrollment">
-                    <option value="Full Time">Full Time</option>
-                    <option value="Part Time">Part Time</option>
-                    <option value="Remote">Remote</option>
-                    <option value="Internship">Internship</option>
-                    <option value="Hybrid">Hybrid</option>
-                </select>
-                <button type="submit" class="w-full border rounded-lg p-2 buttonColor my-4 text-gray-100" >Create Ad</button>
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="my-4 border-2 border-gray-200 rounded-lg p-2 w-full" required>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="mt-4 border-2 border-gray-200 rounded-lg p-2 w-full" required>
+                <div class="mt-3 flex items-center justify-between">
+                    <div class="flex items-start">
+                        <div class="flex items-center h-5">
+                          <input id="remember" name="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800">
+                        </div>
+                        <div class="ml-3 text-sm">
+                          <label for="remember" class="">Remember me</label>
+                        </div>
+                    </div>
+                    <a href="#" class="text-sm font-medium hover:underline dark:text-primary-500">Forgot password?</a>
+                </div>
+                <button type="submit" class="w-full border rounded-lg p-2 buttonColor my-4 text-gray-100" >Sign in</button>
+                <p class="text-sm font-light text-gray-700">
+                    Don’t have an account yet? <a href="{{route('company_register')}}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+                </p>
+                @if ($errors->any())
+                <div class="text-sm mt-5 alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
             </form>
         </div>
     </div>
