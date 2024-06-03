@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('listings', function (Blueprint $table) {
             $table->increments('listing_id');
-            $table->string('job_application_letter')->nullable();
+            $table->string('portofolio')->nullable();
             $table->string('cv')->nullable();
             $table->integer('ad_id')->unsigned();
             $table->integer('user_id')->unsigned();

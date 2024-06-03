@@ -79,7 +79,7 @@
                     <div class="mx-5">
                         <h5 class="mb-1 text-base font-medium text-gray-500 ">{{$company->Address}}</h5>
                     </div>
-                    <div class="mx-5 mt-2 overflow-clip">
+                    <div class="mx-5 mt-2 only-3-lines">
                         <h5 class="mb-1 text-base font-medium text-gray-500 ">{{$ad->description}}</h5>
                     </div>
                     <div class="mx-5">

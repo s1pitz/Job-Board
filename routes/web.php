@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\HomeController;
 use App\Models\Ad;
 use App\Models\Company;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,8 @@ Route::get('/', function () {
     return view('index', compact('companies'));
 
 })->name('home');
+
+Route::post('/', [HomeController::class, 'create_listing'])->name('create_listing');
 
 Route::get('/login', [UserAuthenticatorController::class, 'login'])->name('login');
 Route::get('/register', [UserAuthenticatorController::class, 'register'])->name('register');
