@@ -6,6 +6,8 @@ use App\Models\Listing;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class HomeController extends Controller
 {
@@ -28,7 +30,12 @@ class HomeController extends Controller
             'user_id' => $userId,
         ]);
 
-        return redirect()->route('home');
+        $successfull = true;
+        $companies = DB::table('companies')
+            ->join('ads', 'companies.company_id', '=', 'ads.company_id')
+            ->get();
+
+        return view('index', compact('companies','successfull'));
 
         // return dd($request);
     }

@@ -56,18 +56,39 @@
             <input type="hidden" id="company_id" name="company_id">
             <input type="hidden" id="ad_id" name="ad_id">
             <div class="w-full border border-blue-800 rounded-lg py-10 flex flex-row justify-center">
-                <input type="file" name="fileCV" id="fileCV" class="inputfile">
+                <input type="file" name="fileCV" id="fileCV" class="inputfile" required>
                 <label for="fileCV" class="text-base fontEpilogue text-gray-600">Add your CV here!</label>
             </div>
             <div class="w-full border border-blue-800 rounded-lg py-10 flex flex-row justify-center">
-                <input type="file" name="filePortofolio" id="filePortofolio" class="inputfile">
+                <input type="file" name="filePortofolio" id="filePortofolio" class="inputfile" required>
                 <label for="filePortofolio" class="text-base fontEpilogue text-gray-600">Add your Portofolio here!</label>
+            </div>
+            <div>
+                <h5 class="text-sm text-gray-400 text-center fontEpilogue">Make sure to include your contact information on your CV</h5>
             </div>
             <div class="w-full flex flex-row justify-center">
                 <button type="submit" class="font-bold text-xs py-2 px-8 border border-blue-950 fontEpilogue rounded-full">Submit</button>
             </div>
         </div>
     </form>
+
+    @if($successfull == true)
+    <div id="overlayOn" class="" onclick="off()"></div>
+        <div id="popSuccessfull" class="fixed top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 my-auto mx-auto px-10 pb-10 min-h-96 max-h-screen max-w-screen-lg w-11/12 flex flex-col flex-wrap justify-items-start bg-slate-50 border rounded-2xl" onclick="off()">
+            <div class="flex flex-row justify-center">
+                <img class="w-96" src="{{asset('images/successfull.png')}}" alt="">
+            </div>
+            <div class="mt-5 mb-2">
+                <h5 class="text-2xl text-gray-700 font-semibold text-center fontEpilogue mb-0">Your Application Submitted!</h5>
+            </div>
+            <div>
+                <h5 class="text-base text-gray-400 text-center fontEpilogue">The Recruiter will contact you soon</h5>
+            </div>
+            <div class="mt-6 mb-1">
+                <h5 class="text-base text-slate-400 text-center fontEpilogue">Click anywhere to main page</h5>
+            </div>
+        </div>
+    @endif
 
     <img src="{{asset('images/banner.png')}}" class="w-full" alt="banner">
 
@@ -125,12 +146,18 @@ function off() {
     document.getElementById("overlay").style.display = "none";
     document.getElementById("popup").style.display = "none";
     document.getElementById("CV").style.display="none";
+    document.getElementById("popSuccessfull").style.display="none";
+    document.getElementById("overlayOn").style.display="none";
     document.body.style.overflow = "auto";
 }
 
 function addCV(){
     document.getElementById("popup").style.display="none";
     document.getElementById("CV").style.display="flex";
+}
+
+function switchPopup(){
+    document.getElementById("overlay").style.display = "block";
 }
 </script>
 

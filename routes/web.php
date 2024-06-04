@@ -14,7 +14,9 @@ Route::get('/', function () {
     $companies = DB::table('companies')
     ->join('ads', 'companies.company_id', '=', 'ads.company_id')
     ->get();
-    return view('index', compact('companies'));
+
+    $successfull = false;
+    return view('index', compact('companies', 'successfull'));
 
 })->name('home');
 
@@ -22,7 +24,6 @@ Route::post('/', [HomeController::class, 'create_listing'])->name('create_listin
 
 Route::get('/login', [UserAuthenticatorController::class, 'login'])->name('login');
 Route::get('/register', [UserAuthenticatorController::class, 'register'])->name('register');
-Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
 
 Route::post('/login', [UserAuthenticatorController::class, 'auth_login'])->name('user_login');
 Route::post('/register', [UserAuthenticatorController::class, 'auth_register'])->name('user_register');
