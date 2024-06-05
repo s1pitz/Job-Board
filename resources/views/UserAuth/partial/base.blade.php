@@ -14,7 +14,7 @@
 
     @include('UserAuth.partial.header')
 
-    <div class="container flex justify-center items-center h-screen">
+    <div class="w-full flex justify-center items-center h-screen">
         @yield('content')
     </div>
 
