@@ -4,8 +4,8 @@
 
 @section('content')
     <div class="bg-slate-50 p-5 max-w-screen-md w-auto flex flex-row justify-center items-center gap-2 border rounded-3xl">
-        <div class="bg-white shadow-slate-300 shadow-md p-5 w-96 rounded-xl">
-            <h5 class="text-4xl font-bold text-left mt-2 mb-10">Login</h1>
+        <div class="sm:bg-white sm:shadow-slate-300 sm:shadow-md p-5 w-96 rounded-xl">
+            <h5 class="text-4xl font-bold text-left mt-2 mb-10 background-transparent">Login</h1>
             <div class="">
                 <form action="{{route('user_login')}}" method="POST">
                     @csrf
@@ -40,7 +40,7 @@
                 </form>
             </div>
         </div>
-        <div class="">
+        <div class="hidden sm:block">
             <img src="{{ asset('images/login2.png')}}" class="" alt="Login Image">
         </div>
     </div>

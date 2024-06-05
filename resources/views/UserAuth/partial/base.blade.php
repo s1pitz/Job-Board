@@ -10,11 +10,11 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     @vite('resources/css/app.css')
 </head>
-<body class="bg-blue-700" style="background-color: #2264dd">
+<body class="bg-blue-600" style="background: linear-gradient(90deg, #2264dd, #C359CB)">
 
     @include('UserAuth.partial.header')
 
-    <div class="mx-auto container flex justify-center items-center h-screen">
+    <div class="container flex justify-center items-center h-screen">
         @yield('content')
     </div>
 

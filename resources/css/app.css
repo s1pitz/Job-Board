@@ -113,3 +113,11 @@ form{
 	outline: -webkit-focus-ring-color auto 5px;
 }
 
+.background-transparent{
+    height: 45px;
+    background: linear-gradient(90deg, #2360b1, #ff00c3);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
