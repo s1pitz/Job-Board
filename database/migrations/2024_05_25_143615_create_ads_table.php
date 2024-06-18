@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('ads', function (Blueprint $table) {
             $table->increments('ad_id');
-            $table->string('title');
-            $table->longText('description');
-            $table->float('Lower_salary');
+            $table->string('title')->nullable();
+            $table->longText('description')->nullable();
+            $table->float('Lower_salary')->nullable();
             $table->float('Upper_salary')->nullable();
-            $table->string('enrollment');
+            $table->string('enrollment')->nullable();
             $table->integer('company_id')->unsigned();
             $table->foreign('company_id')->references('company_id')->on('companies')->onDelete('cascade');
             $table->timestamps();

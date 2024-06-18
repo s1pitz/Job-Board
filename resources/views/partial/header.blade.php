@@ -12,17 +12,17 @@
         </button>
         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 custom md:border-0 md:bg-transparent border-gray-700">
-            <li>
-                <a href="{{route('home')}}" class="block py-2 px-3 text-white bg-blue-500 rounded md:bg-transparent md:p-0 md:text-blue-800 md:hover:text-blue-500" aria-current="page">Home</a>
+            <li class="navbarli">
+                <a href="{{route('home')}}" class="navbar-animation block py-2 px-3 text-white bg-blue-500 rounded md:bg-transparent md:p-0 md:text-blue-800 md:hover:text-blue-500" aria-current="page">Home</a>
             </li>
-            <li>
-                <a href="#" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0 md:text-blue-800 md:dark:hover:bg-transparent">Events</a>
+            <li class="navbarli">
+                <a href="#" class="navbar-animation block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0 md:text-blue-800 md:dark:hover:bg-transparent">Events</a>
             </li>
             @auth
-                <li>
+                <li class="navbarli">
                     <form id="HEHE" action="{{route("user_logout")}}" method="POST">
                         @csrf
-                        <a href="#" onclick="logoutFunction()" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0 md:text-blue-800 md:dark:hover:bg-transparent">Logout</a>
+                        <a href="#" onclick="logoutFunction()" class="navbar-animation block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0 md:text-blue-800 md:dark:hover:bg-transparent">Logout</a>
                     </form>
                     <script>
                         function logoutFunction() {
@@ -31,12 +31,12 @@
                     </script>
                 </li>
             @else
-                <li>
-                    <a href="{{route('login')}}" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0 md:text-blue-800 md:dark:hover:bg-transparent">Sign In</a>
+                <li class="navbarli">
+                    <a href="{{route('login')}}" class="navbar-animation block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0 md:text-blue-800 md:dark:hover:bg-transparent">Sign In</a>
                 </li>
             @endauth
-            <li>
-                <a href="{{route('company')}}" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0 md:text-blue-800 md:dark:hover:bg-transparent">Company</a>
+            <li class="navbarli">
+                <a href="{{route('company')}}" class="navbar-animation block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0 md:text-blue-800 md:dark:hover:bg-transparent">Company</a>
             </li>
             </ul>
         </div>

@@ -6,6 +6,8 @@ use App\Models\Applicant;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class UserAuthenticatorController extends Controller
 {
@@ -36,11 +38,17 @@ class UserAuthenticatorController extends Controller
 
     public function auth_register(Request $request){
 
-        $request->validate([
+        $validate = $request->validate([
             'name' => 'required|string',
             'email' => 'required|email',
             'password' => 'required|string'
         ]);
+
+        if(User::where('email', $request->input('email'))->exists()){
+            return redirect()->back()->withErrors([
+                "error" => "Email already exists"
+            ]);
+        }
 
         User::create([
             'name' => $request->input('name'),

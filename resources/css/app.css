@@ -53,6 +53,20 @@ html {
     cursor: pointer;
 }
 
+#overlayWait{
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+}
+
 #overlayOn{
     position: fixed;
     display: block;
@@ -76,6 +90,11 @@ form{
     z-index: 3;
 }
 
+#popUpWait{
+    display: none;
+    z-index: 3;
+}
+
 #popSuccessfull{
     display: flex;
     z-index: 5;
@@ -86,11 +105,11 @@ form{
     z-index: 4;
 }
 
-.only-3-lines{
+.only-1-lines{
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
 
@@ -120,4 +139,66 @@ form{
     -webkit-background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
+}
+
+.grid-ad{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: min-content 1fr;
+    grid-auto-flow: row dense;
+}
+
+@media (min-width: 768px) {
+    .grid-ad{
+        display: grid;
+        grid-template-columns: 72% auto 25%;
+        grid-template-rows: min-content 1fr;
+        grid-auto-flow: row dense;
+    }
+}
+
+.grid-preview{
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 4;
+}
+
+.grid-requirements{
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+#listCategories li{
+    display: inline-block;
+}
+
+.navbarli{
+    position: relative;
+}
+
+.navbar-animation{
+    transition: color 0.3 ease;
+}
+
+.navbarli:hover a{
+    color: #3b82f6;
+}
+
+.navbarli::before{
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #3b82f6;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.navbarli:hover:before{
+    visibility: visible;
+    width: 100%;
 }

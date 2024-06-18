@@ -74,20 +74,21 @@
 
     @if($successfull == true)
     <div id="overlayOn" class="" onclick="off()"></div>
-        <div id="popSuccessfull" class="fixed top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 my-auto mx-auto px-10 pb-10 min-h-96 max-h-screen max-w-screen-lg w-11/12 flex flex-col flex-wrap justify-items-start bg-slate-50 border rounded-2xl" onclick="off()">
-            <div class="flex flex-row justify-center">
-                <img class="w-96" src="{{asset('images/successfull.png')}}" alt="">
-            </div>
-            <div class="mt-5 mb-2">
-                <h5 class="text-2xl text-gray-700 font-semibold text-center fontEpilogue mb-0">Your Application Submitted!</h5>
-            </div>
-            <div>
-                <h5 class="text-base text-gray-400 text-center fontEpilogue">The Recruiter will contact you soon</h5>
-            </div>
-            <div class="mt-6 mb-1">
-                <h5 class="text-base text-slate-400 text-center fontEpilogue">Click anywhere to main page</h5>
-            </div>
+
+    <div id="popSuccessfull" class="fixed top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 my-auto mx-auto px-10 pb-10 min-h-96 max-h-screen max-w-screen-lg w-11/12 flex flex-col flex-wrap justify-items-start bg-slate-50 border rounded-2xl" onclick="off()">
+        <div class="flex flex-row justify-center">
+            <img class="w-96" src="{{asset('images/successfull.png')}}" alt="">
         </div>
+        <div class="mt-5 mb-2">
+            <h5 class="text-2xl text-gray-700 font-semibold text-center fontEpilogue mb-0">Your Application Submitted!</h5>
+        </div>
+        <div>
+            <h5 class="text-base text-gray-400 text-center fontEpilogue">The Recruiter will contact you soon</h5>
+        </div>
+        <div class="mt-6 mb-1">
+            <h5 class="text-base text-slate-400 text-center fontEpilogue">Click anywhere to main page</h5>
+        </div>
+    </div>
     @endif
 
     <img src="{{asset('images/banner.png')}}" class="w-full" alt="banner">
@@ -97,23 +98,23 @@
     </div>
 
     <div class="flex flex-row items-center justify-center flex-wrap gap-y-4 my-4 fontEpilogue mx-10 gap-x-4">
-        @foreach($companies as $company)
-        <a href="#" onclick="on({{json_encode($company)}})">
+        @foreach($availableads as $availablead)
+        <a href="#" onclick="on({{json_encode($availablead)}})">
             <div class="w-64 h-64 bg-white border border-gray-200 rounded-lg shadow ">
                 <div class="flex flex-col pb-10">
                     <div class="pt-2 px-5 w-full flex flex-row items-center justify-between">
                         <img class="mt-3 w-14 h-14 mb-3 rounded-full border" src="{{asset('images/logo-light.png')}}" alt="logo image"/>
 
-                        <span class="p-1 border border-blue-500 text-blue-500">{{$company->enrollment}}</span>
+                        <span class="p-1 border border-blue-500 text-blue-500">{{$availablead->enrollment}}</span>
                     </div>
                     <div class="mx-5 ">
-                        <h5 class="mb-1 text-xl font-medium text-gray-900 ">{{$company->title}}</h5>
+                        <h5 class="mb-1 text-xl font-medium text-gray-900 ">{{$availablead->title}}</h5>
                     </div>
                     <div class="mx-5 whitespace-nowrap">
-                        <h5 class="mb-1 text-base font-medium text-gray-500 ">{{$company->Address}}</h5>
+                        <h5 class="mb-1 text-base font-medium text-gray-500 ">{{$availablead->Address}}</h5>
                     </div>
-                    <div class="mx-5 mt-2 only-3-lines">
-                        <h5 class="mb-1 text-base font-medium text-gray-500 ">{{$company->description}}</h5>
+                    <div class="mx-5 mt-2 only-1-lines">
+                        <h5 class="mb-1 text-base font-medium text-gray-500 ">{{$availablead->description}}</h5>
                     </div>
                     <div class="mx-5">
                     </div>
@@ -122,13 +123,62 @@
         </a>
         @endforeach
     </div>
+
+    <div id="overlayWait" class="" onclick="offWait()"></div>
+    <div id="popUpWait" class="fixed top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 my-auto mx-auto px-10 pb-10 min-h-96 max-h-screen max-w-screen-lg w-11/12 flex flex-col flex-wrap justify-items-start bg-slate-50 border rounded-2xl" onclick="off()">
+        <div class="flex flex-row justify-center">
+            <img class="w-96" src="{{asset('images/successfull.png')}}" alt="">
+        </div>
+        <div class="mt-5 mb-2">
+            <h5 class="text-2xl text-gray-700 font-semibold text-center fontEpilogue mb-0">Your Application Submitted!</h5>
+        </div>
+        <div>
+            <h5 class="text-base text-gray-400 text-center fontEpilogue">The Recruiter will contact you soon</h5>
+        </div>
+        <div class="mt-6 mb-1">
+            <h5 class="text-base text-slate-400 text-center fontEpilogue">Click anywhere to main page</h5>
+        </div>
+    </div>
+
+    @auth
+
+    <div class="mt-7 mb-3 flex flex-col items-center justify-center">
+        <h1 class="text-2xl text-gray-700 font-semibold text-center fontEpilogue">Active Listings</h1>
+    </div>
+
+    <div class="flex flex-row items-center justify-center flex-wrap gap-y-4 my-4 fontEpilogue mx-10 gap-x-4">
+        @foreach($activeads as $activead)
+        <a href="#" onclick="wait()">
+            <div class="w-64 h-64 bg-white border border-gray-200 rounded-lg shadow ">
+                <div class="flex flex-col pb-10">
+                    <div class="pt-2 px-5 w-full flex flex-row items-center justify-between">
+                        <img class="mt-3 w-14 h-14 mb-3 rounded-full border" src="{{asset('images/logo-light.png')}}" alt="logo image"/>
+
+                        <span class="p-1 border border-blue-500 text-blue-500">{{$activead->enrollment}}</span>
+                    </div>
+                    <div class="mx-5 ">
+                        <h5 class="mb-1 text-xl font-medium text-gray-900 ">{{$activead->title}}</h5>
+                    </div>
+                    <div class="mx-5 whitespace-nowrap">
+                        <h5 class="mb-1 text-base font-medium text-gray-500 ">{{$activead->Address}}</h5>
+                    </div>
+                    <div class="mx-5 mt-2 only-1-lines">
+                        <h5 class="mb-1 text-base font-medium text-gray-500 ">{{$activead->description}}</h5>
+                    </div>
+                    <div class="mx-5">
+                    </div>
+                </div>
+            </div>
+        </a>
+        @endforeach
+    </div>
+    @endauth
 @endsection
 
 
 <script>
 function on(company) {
 
-    console.log(company);
     document.getElementById("company_id").value = company.company_id;
     document.getElementById("ad_id").value = company.ad_id;
     document.getElementById("popupTitle").innerText = company.title;
@@ -142,13 +192,25 @@ function on(company) {
     document.body.style.overflow = "hidden";
 }
 
+function wait(){
+    document.getElementById("overlayWait").style.display = "block";
+    document.getElementById("popUpWait").style.display = "flex";
+    document.body.style.overflow = "hidden";
+}
+
+function offWait(){
+    document.body.style.overflow = "auto";
+    document.getElementById("popUpWait").style.display="none";
+    document.getElementById("overlayWait").style.display = "none";
+}
+
 function off() {
+    document.body.style.overflow = "auto";
     document.getElementById("overlay").style.display = "none";
     document.getElementById("popup").style.display = "none";
     document.getElementById("CV").style.display="none";
     document.getElementById("popSuccessfull").style.display="none";
     document.getElementById("overlayOn").style.display="none";
-    document.body.style.overflow = "auto";
 }
 
 function addCV(){

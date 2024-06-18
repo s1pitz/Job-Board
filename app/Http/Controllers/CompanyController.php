@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Ad;
+use App\Models\Category;
 use App\Models\Company;
 use App\Models\Listing;
+use App\Models\Requirement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -61,11 +64,9 @@ class CompanyController extends Controller
 
         // Check if the password is correct
         if(Hash::check($request->password, $company->password)){
-            // Authentication successful, login the company
-            // Redirect to the desired route
+            $deleteads = DB::table('ads')->whereNull('title')->delete();
 
             $ads = Ad::where('company_id', $company->company_id)->get();
-
             return view('company.company_home', compact('ads', 'company'));
         }
 
@@ -75,17 +76,32 @@ class CompanyController extends Controller
         ]);
     }
 
-    public function company_home(){
-        return view('company.company_home');
+    public function company_home(Request $request){
+        $company_id = $request->input('company_id');
+        $company = Company::where('company_id', $company_id)->first();
+
+        $deleteads = DB::table('ads')->whereNull('title')->delete();
+
+        $ads = Ad::where('company_id', $company_id)->get();
+        return view('company.company_home', compact('ads', 'company'));
     }
 
     public function job_create(Request $request){
 
         $company_id = $request->input('company_id');
-        return view('company.job_create', compact('company_id'));
+
+        $ad = Ad::create([
+            'company_id' => $company_id,
+        ]);
+
+        $selectedCategories = null;
+        $requirementList = null;
+        return view('company.job_create', compact('company_id', 'ad', 'selectedCategories', 'requirementList'));
     }
 
     public function register_ad(Request $request){
+
+        // dd($request);
 
         $request->validate([
             'company_id' => 'required|int',
@@ -96,21 +112,115 @@ class CompanyController extends Controller
             'enrollment' => 'required|string',
         ]);
 
-        Ad::create([
-            'company_id' => $request->input('company_id'),
+        $ad = Ad::where('ad_id', $request->input('ad_id'))->first();
+
+        $ad->update([
             'title' => $request->input('ad_title'),
             'description' => $request->input('description'),
             'Lower_salary' => $request->input('company_Lower_salary'),
             'Upper_salary' => $request->input('company_Upper_salary'),
             'enrollment' => $request->input('enrollment'),
-
         ]);
 
-        return redirect()->route('company');
+        $company_id = $request->input('company_id');
+        $company = Company::where('company_id', $company_id)->first();
+        $deleteads = DB::table('ads')->whereNull('title')->delete();
+        $ads = Ad::where('company_id', $company_id)->get();
+        return view('company.company_home', compact('ads', 'company'));
     }
 
     public function company_profile(Request $request){
         $company_id = $request->input('company_id');
         return view('company.company_profile');
+    }
+
+    public function add_requirement(Request $request){
+
+        $ad_id = $request->input('ad_id');
+
+        $alreadyExists = Requirement::where('name', $request->input('name'))->where('ad_id', $ad_id)->first();
+
+        if($alreadyExists == null){
+            Requirement::create([
+                'ad_id' => $ad_id,
+                'name' => $request->input('name')
+            ]);
+        }
+
+        $company_id = $request->input('company_id');
+        $ad = Ad::where('ad_id', $ad_id)->first();
+        $selectedCategories = Category::where('ad_id', $ad_id)->get();
+        $requirementList = Requirement::where('ad_id', $ad_id)->get();
+
+        return view('company.job_create', compact('company_id', 'ad', 'selectedCategories', 'requirementList'));
+    }
+
+    public function delete_requirement(Request $request){
+        // dd($request);
+        $ad_id = $request->input('ad_id');
+        $requirement_id = $request->input('requirement_id');
+
+        DB::table('requirements')
+            ->where('requirement_id', $requirement_id)
+            ->delete();
+
+        $company_id = $request->input('company_id');
+        $ad = Ad::where('ad_id', $ad_id)->first();
+        $selectedCategories = Category::where('ad_id', $ad_id)->get();
+        $requirementList = Requirement::where('ad_id', $ad_id)->get();
+        if($requirementList->isEmpty()){
+            $requirementList = null;
+        }
+        return view('company.job_create', compact('company_id', 'ad', 'selectedCategories', 'requirementList'));
+    }
+
+    public function add_category(Request $request){
+
+        $category = $request->input('category');
+        $type = 0;
+
+        if($category == 'Marketing'){
+            $type = 1;
+        } else if($category == 'Design'){
+            $type = 2;
+        } else if($category == 'Business'){
+            $type = 3;
+        } else if($category == 'Law'){
+            $type = 4;
+        } else if($category == 'Technology'){
+            $type = 5;
+        } else if($category == 'Administration'){
+            $type = 6;
+        } else if($category == 'Engineering'){
+            $type = 7;
+        } else if($category == 'Communications'){
+            $type = 8;
+        } else if($category == 'Health Care'){
+            $type = 9;
+        }
+
+        // dd($type);
+        $alreadyExists = Category::where('type_id', $type)->where('ad_id', $request->input('ad_id'))->first();
+
+        if($alreadyExists == null){
+            Category::create([
+                'type_id' => $type,
+                'name' => $category,
+                'text_color' => $request->input('text_color'),
+                'background_color' => $request->input('bg_color'),
+                'ad_id' => $request->input('ad_id')
+            ]);
+        }
+
+        $company_id = $request->input('company_id');
+        $ad_id = $request->input('ad_id');
+
+        $ad = Ad::where('ad_id', $ad_id)->first();
+        $selectedCategories = Category::where('ad_id', $ad_id)->get();
+        $requirementList = Requirement::where('ad_id', $ad_id)->get();
+        if($requirementList->isEmpty()){
+            $requirementList = null;
+        }
+        return view('company.job_create', compact('company_id', 'ad', 'selectedCategories', 'requirementList'));
     }
 }

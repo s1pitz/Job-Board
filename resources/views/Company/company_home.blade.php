@@ -25,11 +25,11 @@
             </button>
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                 <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 custom md:border-0 md:bg-transparent border-gray-700">
-                <li>
+                <li class="navbarli">
                     <form id="createHEHE" action="{{route('job_create')}}" method="POST">
                         @csrf
                         <input type="hidden" id="company_id" name="company_id" value="{{$company->company_id}}">
-                        <a href="#" onclick="createFunction()" class="block py-2 px-3 text-white bg-blue-500 rounded md:bg-transparent md:p-0 md:text-blue-800 md:hover:text-blue-500" aria-current="page">Add</a>
+                        <a href="#" onclick="createFunction()" class="navbar-animation block py-2 px-3 text-white bg-blue-500 rounded md:bg-transparent md:p-0 md:text-blue-800 md:hover:text-blue-500" aria-current="page">Add</a>
                     </form>
                     <script>
                         function createFunction() {
@@ -38,11 +38,11 @@
                     </script>
 
                 </li>
-                <li>
+                <li class="navbarli">
                     <form id="profileHEHE" action="{{route('company_profile')}}" method="POST">
                         @csrf
                         <input type="hidden" id="company_id" name="company_id" value="{{$company->company_id}}">
-                        <a href="#" onclick="profileFunction()" class="block py-2 px-3 text-white bg-blue-500 rounded md:bg-transparent md:p-0 md:text-blue-800 md:hover:text-blue-500" aria-current="page">Profile</a>
+                        <a href="#" onclick="profileFunction()" class="navbar-animation block py-2 px-3 text-white bg-blue-500 rounded md:bg-transparent md:p-0 md:text-blue-800 md:hover:text-blue-500" aria-current="page">Profile</a>
                     </form>
                     <script>
                         function profileFunction() {
@@ -51,8 +51,8 @@
                     </script>
 
                 </li>
-                <li>
-                    <a href="{{route('home')}}" class="block py-2 px-3 text-white bg-blue-500 rounded md:bg-transparent md:p-0 md:text-blue-800 md:hover:text-blue-500" aria-current="page">Back</a>
+                <li class="navbarli">
+                    <a href="{{route('home')}}" class="navbar-animation block py-2 px-3 text-white bg-blue-500 rounded md:bg-transparent md:p-0 md:text-blue-800 md:hover:text-blue-500" aria-current="page">Back</a>
                 </li>
                 </ul>
             </div>
@@ -79,7 +79,7 @@
                     <div class="mx-5">
                         <h5 class="mb-1 text-base font-medium text-gray-500 ">{{$company->Address}}</h5>
                     </div>
-                    <div class="mx-5 mt-2 only-3-lines">
+                    <div class="mx-5 mt-2 only-1-lines">
                         <h5 class="mb-1 text-base font-medium text-gray-500 ">{{$ad->description}}</h5>
                     </div>
                     <div class="mx-5">
