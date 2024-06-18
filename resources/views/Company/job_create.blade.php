@@ -57,9 +57,9 @@
         </div>
         <div>
             <div class="max-w-screen-xl flex flex-wrap flex-row items-center justify-between mx-auto px-6">
-                <div id="first-step" class="h-1.5 rounded-lg bg-blue-900 w-[32%]"></div>
-                <div id="second-step" class="h-1.5 rounded-lg bg-gray-300 w-[32%]"></div>
-                <div id="third-step" class="h-1.5 rounded-lg bg-gray-300 w-[32%]"></div>
+                <div id="first-step" class="h-1.5 rounded-lg bg-gray-300 w-[32%]" style="transition: background-color 0.3s ease-in-out;"></div>
+                <div id="second-step" class="h-1.5 rounded-lg bg-gray-300 w-[32%]" style="transition: background-color 0.3s ease-in-out;"></div>
+                <div id="third-step" class="h-1.5 rounded-lg bg-gray-300 w-[32%]" style="transition: background-color 0.3s ease-in-out;"></div>
             </div>
         </div>
 
@@ -404,22 +404,87 @@
             }
         });
 
-        document.addEventListener('DOMContentLoaded', (event) => {
+        document.addEventListener('DOMContentLoaded', () => {
             const formId = 'form1';
             const inputs = document.querySelectorAll(`input[form="${formId}"], textarea[form="${formId}"]`);
 
+            // Function to handle input background color change
+            function handleInputBackgroundChange(input) {
+                if (input.value.trim() !== '') {
+                    input.classList.remove('bg-gray-200');
+                    input.classList.add('bg-[#e8f0fe]');
+                } else {
+                    input.classList.remove('bg-[#e8f0fe]');
+                    input.classList.add('bg-gray-200');
+                }
+            }
+
             inputs.forEach(input => {
                 input.addEventListener('input', () => {
-                    if (input.value.trim() !== '') {
-                        input.classList.remove('bg-gray-200');
-                        input.classList.add('bg-[#e8f0fe]');
-                    } else {
-                        input.classList.remove('bg-[#e8f0fe]');
-                        input.classList.add('bg-gray-200');
-                    }
+                    handleInputBackgroundChange(input);
                 });
             });
+
+            const titleInput = document.getElementById('name');
+            const descriptionInput = document.getElementById('description');
+            const first_step = document.getElementById('first-step');
+
+            function checkInputs() {
+                if (titleInput.value.trim() !== '' && descriptionInput.value.trim() !== '') {
+                    first_step.classList.add('bg-blue-900');
+                    first_step.classList.remove('bg-gray-300');
+                } else {
+                    first_step.classList.remove('bg-blue-900');
+                    first_step.classList.add('bg-gray-300');
+                }
+            }
+
+            titleInput.addEventListener('input', checkInputs);
+            descriptionInput.addEventListener('input', checkInputs);
+
+            checkInputs();
+
+            const selectedCategories = @json($selectedCategories); // Injecting PHP variable into JavaScript
+            const second_step = document.getElementById('second-step');
+
+            function checkSelectedCategories() {
+                if (selectedCategories && selectedCategories.length > 0) {
+                    first_step.classList.add('bg-blue-900');
+                    first_step.classList.remove('bg-gray-300');
+                    second_step.classList.add('bg-blue-900');
+                    second_step.classList.remove('bg-gray-300');
+                } else {
+                    second_step.classList.remove('bg-blue-900');
+                    second_step.classList.add('bg-gray-300');
+                }
+            }
+
+            checkSelectedCategories();
+
+            const salary = document.getElementById('Lower_salary');
+            const enrollment = document.getElementById('enrollment');
+            const third_step = document.getElementById('third-step');
+
+            function checkLast() {
+                if (salary.value.trim() !== '' && enrollment.value.trim() !== '') {
+                    first_step.classList.add('bg-blue-900');
+                    first_step.classList.remove('bg-gray-300');
+                    second_step.classList.add('bg-blue-900');
+                    second_step.classList.remove('bg-gray-300');
+                    third_step.classList.add('bg-blue-900');
+                    third_step.classList.remove('bg-gray-300');
+                } else {
+                    third_step.classList.remove('bg-blue-900');
+                    third_step.classList.add('bg-gray-300');
+                }
+            }
+
+            salary.addEventListener('input', checkLast);
+            enrollment.addEventListener('input', checkLast);
+
+            checkLast();
         });
+
     </script>
 </body>
 </html>
