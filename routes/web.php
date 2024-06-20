@@ -28,13 +28,15 @@ Route::get('/', function () {
         }
     }
 
+    $categories = DB::table('categories')->get();
+
     if(Auth::guest()){
         $availableads = DB::table('ads')
         ->join('companies', 'ads.company_id', '=', 'companies.company_id')
         ->get();
         $activeads = NULL;
         $successfull = false;
-        return view('index', compact('availableads', 'activeads', 'successfull', 'logos'));
+        return view('index', compact('availableads', 'activeads', 'successfull', 'logos', 'categories'));
 
     } else {
 
@@ -56,7 +58,7 @@ Route::get('/', function () {
         ->get();
 
         $successfull = false;
-        return view('index', compact('availableads', 'activeads', 'successfull', 'logos'));
+        return view('index', compact('availableads', 'activeads', 'successfull', 'logos', 'categories'));
     }
 })->name('home');
 
@@ -86,4 +88,3 @@ Route::post('update_logo', [CompanyController::class, 'update_logo'])->name('upd
 Route::post('view_listings', [CompanyController::class, 'view_listings'])->name('view_listings');
 Route::get('/download-cv/{id}', [CompanyController::class, 'downloadCV'])->name('downloadCV');
 Route::get('/download-portfolio/{id}', [CompanyController::class, 'downloadPort'])->name('downloadPort');
-

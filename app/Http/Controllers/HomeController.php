@@ -52,7 +52,22 @@ class HomeController extends Controller
         ->select('ads.*', 'companies.*', 'listings.*')
         ->get();
 
-        return view('index', compact('companies','availableads', 'activeads', 'successfull'));
+        $logos = DB::table('companies')
+        ->select('logo')
+        ->get();
+
+        if($logos->isEmpty()){
+            $logos = NULL;
+        } else {
+            if($logos->count() <= 5){
+
+            } else {
+                $logos = $logos->random(5);
+            }
+        }
+
+        $categories = DB::table('categories')->get();
+        return view('index', compact('companies','availableads', 'activeads', 'successfull', 'logos', 'categories'));
 
         // return dd($request);
     }

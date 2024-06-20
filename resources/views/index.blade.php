@@ -127,10 +127,20 @@
                     <div class="mx-5 mt-2 only-1-lines">
                         <h5 class="mb-1 text-base font-medium text-gray-500 ">{{$availablead->description}}</h5>
                     </div>
-                    <div class="mx-5">
-                        {{-- @foreach($availablead->categories as $category)
-                            <li>{{ $category->name }}</li>
-                        @endforeach --}}
+                    <div class="mt-5 mx-5">
+                        <div class="scroll-container overflow-x-scroll" style="-ms-overflow-style: none; scrollbar-width: none;" >
+                            <ul id="listCategories" class=" whitespace-nowrap">
+                                @foreach($categories as $category)
+                                    @if ($category->ad_id == $availablead->ad_id)
+                                        <li>
+                                            <button class="px-5 py-2 rounded-l-full rounded-r-full text-base" style="background-color: {{ $category->background_color }}; color: {{ $category->text_color }}">
+                                                {{$category->name}}
+                                            </button>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -180,7 +190,20 @@
                     <div class="mx-5 mt-2 only-1-lines">
                         <h5 class="mb-1 text-base font-medium text-gray-500 ">{{$activead->description}}</h5>
                     </div>
-                    <div class="mx-5">
+                    <div class="mt-5 mx-5">
+                        <div class="scroll-container overflow-x-scroll" style="-ms-overflow-style: none; scrollbar-width: none;" >
+                            <ul id="listCategories" class=" whitespace-nowrap">
+                                @foreach($categories as $category)
+                                    @if ($category->ad_id == $activead->ad_id)
+                                        <li>
+                                            <button class="px-5 py-2 rounded-l-full rounded-r-full text-base" style="background-color: {{ $category->background_color }}; color: {{ $category->text_color }}">
+                                                {{$category->name}}
+                                            </button>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

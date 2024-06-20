@@ -46,7 +46,7 @@
         </div>
     </nav>
 
-    <main class="mb-10">
+    <main class=" mb-10">
         <div class="">
             <div class="max-w-screen-xl flex flex-wrap flex-col justify-normal mx-auto p-4">
                 <div>
@@ -366,7 +366,6 @@
             container.scrollLeft = scrollLeft - walk;
         });
 
-        // For touch events
         let startXTouch;
         let scrollLeftTouch;
 
