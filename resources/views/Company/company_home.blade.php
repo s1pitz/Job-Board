@@ -63,34 +63,36 @@
         <h1 class="text-2xl text-gray-700 font-semibold text-center fontEpilogue">Your Ads</h1>
     </div>
 
+
     <div class="min-h-dvh flex flex-row flex-wrap my-4 justify-center fontEpilogue mx-10 gap-x-4">
         @foreach($ads as $ad)
-        <a href="#">
-            <div class="w-64 h-64 bg-white border border-gray-200 rounded-lg shadow ">
-                <div class="flex flex-col pb-10">
-                    <div class="pt-2 px-5 w-full flex flex-row items-center justify-between">
-                        <img class="mt-3 w-14 h-14 mb-3 rounded-full border" src="{{asset('images/logo-light.png')}}" alt="logo image"/>
-
-                        <span class="p-1 border border-blue-500 text-blue-500">{{$ad->enrollment}}</span>
-                    </div>
-                    <div class="mx-5">
-                        <h5 class="mb-1 text-xl font-medium text-gray-900 ">{{$ad->title}}</h5>
-                    </div>
-                    <div class="mx-5">
-                        <h5 class="mb-1 text-base font-medium text-gray-500 ">{{$company->Address}}</h5>
-                    </div>
-                    <div class="mx-5 mt-2 only-1-lines">
-                        <h5 class="mb-1 text-base font-medium text-gray-500 ">{{$ad->description}}</h5>
-                    </div>
-                    <div class="mx-5">
-
-                    </div>
+            <a href="#" onclick="event.preventDefault(); document.getElementById('form-{{$ad->ad_id}}').submit();">
+                <div class="w-64 h-64 bg-white border border-gray-200 rounded-lg shadow">
+                    <form action="{{route('view_listings')}}" method="POST" id="form-{{$ad->ad_id}}">
+                        @csrf
+                        <div class="flex flex-col pb-10">
+                            <div class="pt-2 px-5 w-full flex flex-row items-center justify-between mb-3">
+                                <img src="{{asset('company_logos/'.$company->logo)}}" class="mt-2 w-14 h-14 rounded-full border" alt="Company logo" style="object-fit: contain;">
+                                <span class="p-1 border border-blue-500 text-blue-500">{{$ad->enrollment}}</span>
+                            </div>
+                            <div class="mx-5">
+                                <h5 class="mb-1 text-xl only-1-lines font-medium text-gray-900">{{$ad->title}}</h5>
+                            </div>
+                            <div class="mx-5">
+                                <h5 class="mb-1 text-base font-medium text-gray-500">{{$company->Address}}</h5>
+                            </div>
+                            <div class="mx-5 mt-2 only-1-lines">
+                                <h5 class="mb-1 text-base font-medium text-gray-500">{{$ad->description}}</h5>
+                            </div>
+                            <div class="mx-5"></div>
+                            <input type="hidden" name="ad_id" value="{{$ad->ad_id}}">
+                            <input type="hidden" name="company_id" value="{{$company->company_id}}">
+                        </div>
+                    </form>
                 </div>
-            </div>
-        </a>
+            </a>
         @endforeach
     </div>
-
     <footer class="custom mt-10">
         <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex justify-end">
             <div class="mb-6 md:mb-0">

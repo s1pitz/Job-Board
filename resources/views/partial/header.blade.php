@@ -16,7 +16,7 @@
                 <a href="{{route('home')}}" class="navbar-animation block py-2 px-3 text-white bg-blue-500 rounded md:bg-transparent md:p-0 md:text-blue-800 md:hover:text-blue-500" aria-current="page">Home</a>
             </li>
             <li class="navbarli">
-                <a href="#" class="navbar-animation block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0 md:text-blue-800 md:dark:hover:bg-transparent">Events</a>
+                <a href="#" class="navbar-animation block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0 md:text-blue-800 md:dark:hover:bg-transparent" onclick="ongoing()">Events</a>
             </li>
             @auth
                 <li class="navbarli">
@@ -42,3 +42,9 @@
         </div>
     </div>
 </nav>
+
+<script>
+    function ongoing() {
+        alert("Future Update!");
+    }
+</script>

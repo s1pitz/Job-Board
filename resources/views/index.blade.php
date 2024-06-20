@@ -61,7 +61,7 @@
             </div>
             <div class="w-full border border-blue-800 rounded-lg py-10 flex flex-row justify-center">
                 <input type="file" name="filePortofolio" id="filePortofolio" class="inputfile" required>
-                <label for="filePortofolio" class="text-base fontEpilogue text-gray-600">Add your Portofolio here!</label>
+                <label for="filePortofolio" class="text-base fontEpilogue text-gray-600">Add your Portfolio here!</label>
             </div>
             <div>
                 <h5 class="text-sm text-gray-400 text-center fontEpilogue">Make sure to include your contact information on your CV</h5>
@@ -92,6 +92,17 @@
     @endif
 
     <img src="{{asset('images/banner.png')}}" class="w-full" alt="banner">
+    <div class="mt-7 mb-3 flex flex-col items-center justify-center">
+        <h1 class="text-2xl text-gray-700 font-semibold text-center fontEpilogue">Hiring Companies</h1>
+    </div>
+
+    <div class="flex flex-row items-center justify-center flex-wrap gap-y-4 my-4 fontEpilogue mx-10">
+        @foreach($logos as $logo)
+            <div class="w-[calc(20%)] flex flex-col h-24 items-center border">
+                <img src="{{asset('company_logos/'.$logo->logo)}}" class="h-24" alt="Company logo" style="object-fit: cover;">
+            </div>
+        @endforeach
+    </div>
 
     <div class="mt-7 mb-3 flex flex-col items-center justify-center">
         <h1 class="text-2xl text-gray-700 font-semibold text-center fontEpilogue">Jobs Available</h1>
@@ -103,20 +114,23 @@
             <div class="w-64 h-64 bg-white border border-gray-200 rounded-lg shadow ">
                 <div class="flex flex-col pb-10">
                     <div class="pt-2 px-5 w-full flex flex-row items-center justify-between">
-                        <img class="mt-3 w-14 h-14 mb-3 rounded-full border" src="{{asset('images/logo-light.png')}}" alt="logo image"/>
+                        <img src="{{asset('company_logos/'.$availablead->logo)}}" class="mt-2 w-14 h-14 rounded-full border" alt="Company logo" style="object-fit: contain;">
 
                         <span class="p-1 border border-blue-500 text-blue-500">{{$availablead->enrollment}}</span>
                     </div>
-                    <div class="mx-5 ">
-                        <h5 class="mb-1 text-xl font-medium text-gray-900 ">{{$availablead->title}}</h5>
+                    <div class="mx-5 mt-2">
+                        <h5 class="only-1-lines mb-1 text-xl font-medium text-gray-900 ">{{$availablead->title}}</h5>
                     </div>
                     <div class="mx-5 whitespace-nowrap">
-                        <h5 class="mb-1 text-base font-medium text-gray-500 ">{{$availablead->Address}}</h5>
+                        <h5 class="only-1-lines mb-1 text-base font-medium text-gray-500 ">{{$availablead->Address}}</h5>
                     </div>
                     <div class="mx-5 mt-2 only-1-lines">
                         <h5 class="mb-1 text-base font-medium text-gray-500 ">{{$availablead->description}}</h5>
                     </div>
                     <div class="mx-5">
+                        {{-- @foreach($availablead->categories as $category)
+                            <li>{{ $category->name }}</li>
+                        @endforeach --}}
                     </div>
                 </div>
             </div>
@@ -142,25 +156,26 @@
 
     @auth
 
-    <div class="mt-7 mb-3 flex flex-col items-center justify-center">
-        <h1 class="text-2xl text-gray-700 font-semibold text-center fontEpilogue">Active Listings</h1>
-    </div>
-
+    @if($activeads->count() > 0)
+        <div class="mt-7 mb-3 flex flex-col items-center justify-center">
+            <h1 class="text-2xl text-gray-700 font-semibold text-center fontEpilogue">Active Listings</h1>
+        </div>
+    @endif
     <div class="flex flex-row items-center justify-center flex-wrap gap-y-4 my-4 fontEpilogue mx-10 gap-x-4">
         @foreach($activeads as $activead)
         <a href="#" onclick="wait()">
             <div class="w-64 h-64 bg-white border border-gray-200 rounded-lg shadow ">
                 <div class="flex flex-col pb-10">
                     <div class="pt-2 px-5 w-full flex flex-row items-center justify-between">
-                        <img class="mt-3 w-14 h-14 mb-3 rounded-full border" src="{{asset('images/logo-light.png')}}" alt="logo image"/>
+                        <img src="{{asset('company_logos/'.$activead->logo)}}" class="mt-2 w-14 h-14 rounded-full border" alt="Company logo" style="object-fit: cover;">
 
                         <span class="p-1 border border-blue-500 text-blue-500">{{$activead->enrollment}}</span>
                     </div>
-                    <div class="mx-5 ">
-                        <h5 class="mb-1 text-xl font-medium text-gray-900 ">{{$activead->title}}</h5>
+                    <div class="mx-5 mt-2">
+                        <h5 class="only-1-lines mb-1 text-xl font-medium text-gray-900 ">{{$activead->title}}</h5>
                     </div>
                     <div class="mx-5 whitespace-nowrap">
-                        <h5 class="mb-1 text-base font-medium text-gray-500 ">{{$activead->Address}}</h5>
+                        <h5 class="only-1-lines  mb-1 text-base font-medium text-gray-500 ">{{$activead->Address}}</h5>
                     </div>
                     <div class="mx-5 mt-2 only-1-lines">
                         <h5 class="mb-1 text-base font-medium text-gray-500 ">{{$activead->description}}</h5>

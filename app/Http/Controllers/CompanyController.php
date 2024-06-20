@@ -39,7 +39,8 @@ class CompanyController extends Controller
             'email' => $request->input('company_email'),
             'password' => $request->input('company_password'),
             'Address' => $request->input('company_address'),
-            'phone' => $request->input('company_phone')
+            'phone' => $request->input('company_phone'),
+            'logo' => "default.png"
         ]);
 
         return redirect()->route('company');
@@ -131,7 +132,9 @@ class CompanyController extends Controller
 
     public function company_profile(Request $request){
         $company_id = $request->input('company_id');
-        return view('company.company_profile');
+        $company = Company::where('company_id', $company_id)->first();
+        // dd($company);
+        return view('company.company_profile', compact('company'));
     }
 
     public function add_requirement(Request $request){
@@ -222,5 +225,59 @@ class CompanyController extends Controller
             $requirementList = null;
         }
         return view('company.job_create', compact('company_id', 'ad', 'selectedCategories', 'requirementList'));
+    }
+
+    function update_profile(Request $request){
+
+        // dd($request->all());
+        $company = Company::where('company_id', $request->input('company_id'))->first();
+
+        $company->update([
+            'name' => $request->input('company_name'),
+            'email' => $request->input('email'),
+            'Address' => $request->input('company_address'),
+            'phone' => $request->input('phone')
+        ]);
+
+        return view('company.company_profile', compact('company'));
+    }
+
+    function update_logo(Request $request){
+
+        // dd($request->all());
+        $company = Company::where('company_id', $request->input('id'))->first();
+        $logo = $request->file('imageLogo');
+        $logoName = time() . "_" . $logo->getClientOriginalName();
+        $logo->move(public_path("company_logos"), $logoName);
+
+        $company->update([
+            'logo' => $logoName
+        ]);
+
+        return view('company.company_profile', compact('company'));
+    }
+
+    function view_listings(Request $request){
+
+        $company = Company::where('company_id', $request->input('company_id'))->first();
+        $listings = DB::table('listings')
+            ->join('users', 'listings.user_id', '=', 'users.user_id')
+            ->where('ad_id', $request->input('ad_id'))
+            ->select('listings.*', 'users.name as user_name')
+            ->get();
+        // dd($listings);
+        return view('company.view_listing', compact('company', 'listings'));
+    }
+
+    function downloadCV($id){
+        $listing = Listing::where('listing_id', $id)->first();
+        $path = public_path('files/' . $listing->cv);
+        return response()->download($path);
+    }
+
+    function downloadPort($id){
+        $listing = Listing::where('listing_id', $id)->first();
+        $path = public_path('files/' . $listing->portofolio);
+        return response()->download($path);
     }
 }

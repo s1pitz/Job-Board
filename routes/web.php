@@ -14,14 +14,27 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
 
+    $logos = DB::table('companies')
+        ->select('logo')
+        ->get();
+
+    if($logos->isEmpty()){
+        $logos = NULL;
+    } else {
+        if($logos->count() <= 5){
+
+        } else {
+            $logos = $logos->random(5);
+        }
+    }
+
     if(Auth::guest()){
         $availableads = DB::table('ads')
         ->join('companies', 'ads.company_id', '=', 'companies.company_id')
         ->get();
-
         $activeads = NULL;
         $successfull = false;
-        return view('index', compact('availableads', 'activeads', 'successfull'));
+        return view('index', compact('availableads', 'activeads', 'successfull', 'logos'));
 
     } else {
 
@@ -43,7 +56,7 @@ Route::get('/', function () {
         ->get();
 
         $successfull = false;
-        return view('index', compact('availableads', 'activeads', 'successfull'));
+        return view('index', compact('availableads', 'activeads', 'successfull', 'logos'));
     }
 })->name('home');
 
@@ -68,4 +81,9 @@ Route::post('register_ad', [CompanyController::class, 'register_ad'])->name('reg
 Route::post('add_requirement', [CompanyController::class, 'add_requirement'])->name('add_requirement');
 Route::post('delete_requirement', [CompanyController::class, 'delete_requirement'])->name('delete_requirement');
 Route::post('add_category', [CompanyController::class, 'add_category'])->name('add_category');
+Route::post('update_profile', [CompanyController::class, 'update_profile'])->name('update_profile');
+Route::post('update_logo', [CompanyController::class, 'update_logo'])->name('update_logo');
+Route::post('view_listings', [CompanyController::class, 'view_listings'])->name('view_listings');
+Route::get('/download-cv/{id}', [CompanyController::class, 'downloadCV'])->name('downloadCV');
+Route::get('/download-portfolio/{id}', [CompanyController::class, 'downloadPort'])->name('downloadPort');
 
