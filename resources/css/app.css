@@ -209,3 +209,8 @@ form{
     grid-template-rows: min-content 1fr;
     grid-auto-flow: row dense;
 }
+
+.card:hover .cardscale:not(:hover){
+    opacity: 0.8;
+    transform: scale(0.85);
+}

@@ -64,9 +64,9 @@
     </div>
 
 
-    <div class="min-h-dvh flex flex-row flex-wrap my-4 justify-center fontEpilogue mx-10 gap-x-4">
+    <div class="card min-h-dvh flex flex-row flex-wrap my-4 justify-center fontEpilogue mx-10 gap-x-4">
         @foreach($ads as $ad)
-            <a href="#" onclick="event.preventDefault(); document.getElementById('form-{{$ad->ad_id}}').submit();">
+            <a href="#" class="cardscale" onclick="event.preventDefault(); document.getElementById('form-{{$ad->ad_id}}').submit();">
                 <div class="w-64 h-64 bg-white border border-gray-200 rounded-lg shadow">
                     <form action="{{route('view_listings')}}" method="POST" id="form-{{$ad->ad_id}}">
                         @csrf

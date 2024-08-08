@@ -44,7 +44,7 @@
     <form action="{{route('update_profile')}}" id="form_profile" method="POST">@csrf</form>
     <form action="{{route('update_logo')}}" id="form_logo" method="POST" enctype="multipart/form-data">@csrf</form>
 
-    <main class=" mb-10">
+    <main class="h-[calc(100vh-10rem)] mb-10">
         <div class="">
             <div class="max-w-screen-xl flex flex-wrap flex-col justify-normal mx-auto p-4">
                 <div>

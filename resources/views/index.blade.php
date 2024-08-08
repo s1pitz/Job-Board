@@ -108,9 +108,9 @@
         <h1 class="text-2xl text-gray-700 font-semibold text-center fontEpilogue">Jobs Available</h1>
     </div>
 
-    <div class="flex flex-row items-center justify-center flex-wrap gap-y-4 my-4 fontEpilogue mx-10 gap-x-4">
+    <div class="card flex flex-row items-center justify-center flex-wrap gap-y-4 my-4 fontEpilogue mx-10 gap-x-4">
         @foreach($availableads as $availablead)
-        <a href="#" onclick="on({{json_encode($availablead)}})">
+        <a href="#" class="cardscale" onclick="on({{json_encode($availablead)}})">
             <div class="w-64 h-64 bg-white border border-gray-200 rounded-lg shadow ">
                 <div class="flex flex-col pb-10">
                     <div class="pt-2 px-5 w-full flex flex-row items-center justify-between">
@@ -171,9 +171,9 @@
             <h1 class="text-2xl text-gray-700 font-semibold text-center fontEpilogue">Active Listings</h1>
         </div>
     @endif
-    <div class="flex flex-row items-center justify-center flex-wrap gap-y-4 my-4 fontEpilogue mx-10 gap-x-4">
+    <div class="card flex flex-row items-center justify-center flex-wrap gap-y-4 my-4 fontEpilogue mx-10 gap-x-4">
         @foreach($activeads as $activead)
-        <a href="#" onclick="wait()">
+        <a href="#" class="cardscale" onclick="wait()">
             <div class="w-64 h-64 bg-white border border-gray-200 rounded-lg shadow ">
                 <div class="flex flex-col pb-10">
                     <div class="pt-2 px-5 w-full flex flex-row items-center justify-between">
